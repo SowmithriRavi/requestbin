@@ -63,7 +63,7 @@ app.jinja_env.filters['exact_time'] = exact_time
 app.jinja_env.filters['short_date'] = short_date
 
 app.add_url_rule('/', 'views.home')
-app.add_url_rule('/<path:name>', 'views.bin', methods=['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS', 'HEAD', 'PATCH', 'TRACE'])
+app.add_url_rule('/<name>', 'views.bin', methods=['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS', 'HEAD', 'PATCH', 'TRACE'])
 
 app.add_url_rule('/docs/<name>', 'views.docs')
 app.add_url_rule('/api/v1/bins', 'api.bins', methods=['POST'])
@@ -72,6 +72,15 @@ app.add_url_rule('/api/v1/bins/<bin>/requests', 'api.requests', methods=['GET'])
 app.add_url_rule('/api/v1/bins/<bin>/requests/<name>', 'api.request', methods=['GET'])
 
 app.add_url_rule('/api/v1/stats', 'api.stats')
+
+
+# Being used for hosting xml
+app.add_url_rule('/api/v1/<name>', 'api.xml', methods=['GET', 'POST'])
+app.add_url_rule('/api/v1/<bin>/requests', 'api.requests', methods=['GET'])
+
+#API to upload a new xml file
+#Add query param '?replace=true' if you want to replace an existing file
+app.add_url_rule('/api/v1/upload/<name>', 'api.upload.file', methods=['POST'])
 
 # app.add_url_rule('/robots.txt', redirect_to=url_for('static', filename='robots.txt'))
 
