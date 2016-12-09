@@ -117,7 +117,6 @@ def upload_file(name):
     replace = request.args.get('replace')
     if replace != 'true' and os.path.isfile(output_file_name):
         return _response({'error': 'The resource {} already exists'.format(output_file_name)}, 400)
-    print request.files
     if 'file' in request.files:
         form_file = request.files['file']
         if not form_file.filename == '':
